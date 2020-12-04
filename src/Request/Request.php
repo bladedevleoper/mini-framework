@@ -32,9 +32,9 @@ class Request
     {
         $url = explode('/', $this->getUrl());
 
-        $url = array_filter($url, function ($item) {
+        $url = array_filter(callback: function ($item) {
            return !empty($item) && $item != 'shopping-cart';
-        });
+        }, array: $url);
 
         //re-index $url array
         return array_values($url);
