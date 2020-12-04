@@ -1,0 +1,15 @@
+{
+    "name": "james/shopping-cart",
+    "authors": [
+        {
+            "name": "bladedevleoper",
+            "email": "jamesjonestred@gmail.com"
+        }
+    ],
+    "require": {},
+  "autoload": {
+    "psr-4": {
+      "ShoppingCart\\": "../shopping-cart/src/"
+    }
+  }
+}
