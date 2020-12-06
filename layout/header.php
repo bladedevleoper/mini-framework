@@ -9,4 +9,4 @@
     <link rel="stylesheet" href="css/stylesheet.css" >
     <title>Shopping Cart</title>
 </head>
-<div class="container">
+<body>

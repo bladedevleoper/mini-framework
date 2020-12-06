@@ -54,7 +54,13 @@ class Router
         }
     }
 
-    private function inGetRoutes($request)
+    /**
+     * Will check if route is in the route array
+     * @param $request
+     * @return object
+     * @throws Exception
+     */
+    private function inGetRoutes($request): object
     {
         if (!key_exists($request->route, $this->getRoutes())) {
             throw new Exception(PageNotFoundEnum::PAGE_NOT_FOUND);
@@ -65,7 +71,13 @@ class Router
         return $this->mapControllerToAction($route);
     }
 
-    private function inPostRoutes($request)
+    /**
+     *
+     * @param $request
+     * @return object
+     * @throws Exception
+     */
+    private function inPostRoutes($request): object
     {
         if (!key_exists($request->route, $this->postRoutes())) {
             throw new Exception(PageNotFoundEnum::PAGE_NOT_FOUND);
@@ -77,7 +89,12 @@ class Router
 
     }
 
-    private function mapControllerToAction($route): object
+    /**
+     * will return a standard object with controller and action
+     * @param array $route
+     * @return object
+     */
+    private function mapControllerToAction(array $route): object
     {
 
         $route = $this->explodeRoute($route);
@@ -88,12 +105,21 @@ class Router
         ];
     }
 
-    private function explodeRoute($route): array
+    /**
+     * will split the route to a method and action
+     * @param string $route
+     * @return array
+     */
+    private function explodeRoute(string $route): array
     {
         return explode('@', $route);
     }
 
-    public static function getAllRoutes()
+    /**
+     * An array that ruturns the full route array
+     * @return array
+     */
+    public static function getAllRoutes(): array
     {
         return static::$routes;
     }

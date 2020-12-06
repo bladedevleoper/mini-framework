@@ -53,5 +53,4 @@ $shoppingList = new ShoppingList();
     </div>
 </div>
 
-</div>
 
