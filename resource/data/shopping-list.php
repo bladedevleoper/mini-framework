@@ -9,7 +9,7 @@ function shoppingList() {
                 'clothing_type' => 'jeans',
                 'colour' => 'dark blue',
                 'material' => 'denim',
-                'price' => 20.00,
+                'price' => 20.90,
             ]
         ],
         [

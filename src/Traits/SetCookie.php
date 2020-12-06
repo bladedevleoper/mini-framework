@@ -5,10 +5,11 @@ namespace ShoppingCart\Traits;
 
 trait SetCookie
 {
-    public function setCookie()
+    public function setCookie($keyName, $value, $expires): bool
     {
-        //TODO add cookie variables
-       //return setcookie();
-        echo 'cooke is being set';
+        //TODO hash the entries 
+        $value = json_encode($value);
+
+       return setcookie($keyName, $value, $expires, '', '', true, false);
     }
 }

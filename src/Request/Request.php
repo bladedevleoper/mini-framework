@@ -80,4 +80,9 @@ class Request
             'params' => $request ?? null,
         ];
     }
+
+    public function getRequestParameters()
+    {
+        return $this->request['request_bag']->params;
+    }
 }

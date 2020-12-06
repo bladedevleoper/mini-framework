@@ -91,10 +91,10 @@ class Router
 
     /**
      * will return a standard object with controller and action
-     * @param array $route
+     * @param string $route
      * @return object
      */
-    private function mapControllerToAction(array $route): object
+    private function mapControllerToAction(string $route): object
     {
 
         $route = $this->explodeRoute($route);

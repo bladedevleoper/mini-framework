@@ -2,6 +2,7 @@
 
 namespace ShoppingCart\Classes;
 
+use ShoppingCart\Factory\RequestFactory;
 use ShoppingCart\Request\Request;
 use ShoppingCart\Enums\DirectoryEnum;
 use ShoppingCart\Traits\SetCookie;
@@ -10,37 +11,52 @@ class CookieController
 {
     use SetCookie;
 
+    private array $cartCollection = [
+        'total_items' => 0,
+        'cart_total' => 0.00,
+        'cart_items' => [],
+    ];
+
+
     public function registerCookie($shoppingCart = [])
     {
-        $request = new Request();
-        dd($request);
-        //$shoppingCart['order'] = ['milk', 'onions', 'bounty'];
+        $request = RequestFactory::makeRequest();
+        $shoppingCart = json_decode($request->getRequestParameters()['shopping_items'], true);
 
-//        if (empty($shoppingCart)) {
-//            return header('Location:' . DirectoryEnum::HOME_DIRECTORY);
-//        }
-        /*use trait setCookie to set the cookie to return with the headers
-            - https://www.php.net/manual/en/function.setcookie.php
-        */
-       //dd($_REQUEST);
-        $data = json_decode($_POST['shopping_items'], true);
+        if (isset($shoppingCart)) {
 
-        if (isset($data)) {
+            foreach ($shoppingCart as $item) {
+                $price = str_replace('£', '', $item['price']);
+                $this->cartCollection['cart_total'] += $price;
+                $this->cartCollection['cart_items'][] = [
+                    'type' => $item['type'],
+                    'price' => $item['price'],
+                    'colour' => $item['colour'],
+                    'material' => $item['material'],
+                ];
+            }
+        }
 
-            //dd($data);
-
-            header('HTTP/1.1 200 OK');
-            header('Content-Type: application/json');
-            http_response_code(200);
-
-
-            $jsonData = json_encode(['message' => 'Shopping Cart Saved']);
-
-            echo $jsonData;
-
-            exit;
+        if (isset($this->cartCollection)) {
+            $this->returnCookieSuccess();
         }
 
     }
+
+    private function returnCookieSuccess()
+    {
+        header('HTTP/1.1 200 OK');
+        header('Content-Type: application/json');
+        http_response_code(200);
+
+        $this->setCookie('shopping_list', $this->cartCollection, time()+3600);
+
+        $jsonData = json_encode(['message' => 'Shopping Cart Saved']);
+
+        echo $jsonData;
+
+        exit;
+    }
+
 
 }

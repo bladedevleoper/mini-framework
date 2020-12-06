@@ -2,13 +2,15 @@
 
 namespace ShoppingCart\Mappers\Requests;
 
-use Exception;
-
 class RequestMapper
 {
     private static string $url;
-    //private static array $params = [];
+    private static array $params = [];
 
+    /**
+     * Will set the properties within
+     * @param array $request
+     */
     private static function setProperties(array $request): void
     {
         if (count($request) >= 1) {
@@ -16,6 +18,7 @@ class RequestMapper
                 //TODO look at refactoring this and putting this in its own method of the request class
                 $request = splitString($request[0], '?');
                 static::$url = $request[0];
+                static::$params = $request[1];
             } else {
                 static::$url = array_shift($request);
             }
