@@ -10,6 +10,6 @@ trait SetCookie
         //TODO hash the entries 
         $value = json_encode($value);
 
-       return setcookie($keyName, $value, $expires, '', '', true, false);
+       return setcookie($keyName, $value, $expires, '', '', true, true);
     }
 }
