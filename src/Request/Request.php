@@ -61,6 +61,10 @@ class Request
         $this->request['request_uri'] = $_SERVER['REQUEST_URI'] ?? null;
         $this->request['path_info'] = $_SERVER['PATH_INFO'] ?? null;
         $this->request['request_bag'] = $this->getRequestInformation();
+        $this->request['server'] = $_SERVER['SERVER_NAME'] ?? null;
+        $this->request['server_protocol'] = $_SERVER['SERVER_PROTOCOL'] ?? null;
+        $this->request['https'] = $_SERVER['HTTPS'] ?? null;
+
     }
 
 
@@ -84,5 +88,16 @@ class Request
     public function getRequestParameters()
     {
         return $this->request['request_bag']->params;
+    }
+
+    public function getFullUrl($scheme = 'http:')
+    {
+        if (!is_null($this->request['https'])) {
+            $scheme = 'https:';
+        }
+
+        $url = $scheme . '//' . $this->request['server'];
+
+        return parse_url($url);
     }
 }

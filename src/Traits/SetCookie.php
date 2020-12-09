@@ -8,8 +8,16 @@ trait SetCookie
     public function setCookie($keyName, $value, $expires): bool
     {
         //TODO hash the entries 
-        $value = json_encode($value);
 
-       return setcookie($keyName, $value, $expires, '', '', true, true);
+        $options = [
+            'expires' => $expires,
+            'path' => '/',
+            'domain' => request()->getFullUrl()['host'],
+            'secure' => true,
+            'httponly' => true,
+            'SameSite' => 'Strict',
+        ];
+
+       return setcookie($keyName, json_encode($value), $options);
     }
 }
