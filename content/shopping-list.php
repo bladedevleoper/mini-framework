@@ -43,7 +43,13 @@ $shoppingList = new ShoppingList();
                                     </g>
                                 </g>
                             </svg>
-                        <span class="save-shopping-cart-text">Save Shopping</span>
+                        <?php if (!isset($_COOKIE['shopping_list'])) : ?>
+                            <span class="save-shopping-cart-text">Save Shopping</span>
+                        <?php else : ?>
+                            <span class="save-shopping-cart-text">See Saved Shopping</span>
+                        <?php endif; ?>
+
+
                     </button>
                     <?php
                     require_once(__DIR__ .  '/../components/models/success-message.php');
