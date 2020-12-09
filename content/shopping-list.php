@@ -4,20 +4,55 @@ use ShoppingCart\Classes\ShoppingList;
 
 $shoppingList = new ShoppingList();
 
+if (isset($_COOKIE['shopping_list'])) {
+    $savedItems = json_decode($_COOKIE['shopping_list'], true);
+} else {
+    $savedItems = [];
+}
 ?>
 <div class="container">
 <div class="row">
         <h4 class="d-flex justify-content-between align-items-center mb-3">
             <span class="text-muted">Your cart</span>
-            <span class="badge badge-secondary badge-pill ml-3 shopping-cart-count">0</span>
+            <span class="badge badge-secondary badge-pill ml-3 shopping-cart-count">
+                <?php
+                if (isset($savedItems['total_items'])) {
+                        echo $savedItems['total_items'];
+                    } else {
+                        echo 0;
+                    }
+                ?>
+            </span>
         </h4>
 </div>
 
 
 <div class="row">
-    <?php foreach($shoppingList->getShoppingItems() as $item) : ?>
-        <?= $shoppingList->render->renderItem($item); ?>
-    <?php endforeach; ?>
+    <?php if (!empty($savedItems)) : ?>
+        <?php foreach ($savedItems['cart_items'] as $item) : ?>
+        <div class="col-sm-3 bg-dark p-2">
+            <div class="bg-light" style="width:30% height:500px; border-radius: 21px 21px 0 0">
+                <h6 class="ml-3 p-2 item-type"><?= $item['type']; ?></h6>
+                <div class="row p-2">
+                    <img src="#" class="img-thumbnail ml-3 p-2">
+                    <div class="col-sm-12 d-flex">
+                        <ul class="list-group">
+                            <li class="item-type" hidden>type:<?= $item['type']; ?></li>
+                            <li class="list-group-item item-price">Price: <?= $item['price']; ?></li>
+                            <li class="list-group-item item-colour">Colour: <?= ucfirst($item['colour']); ?></li>
+                            <li class="list-group-item item-material">Material: <?= ucfirst($item['material']); ?></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php endforeach; ?>
+    <?php else : ?>
+        <?php foreach($shoppingList->getShoppingItems() as $item) : ?>
+            <?= $shoppingList->render->renderItem($item); ?>
+        <?php endforeach; ?>
+    <?php endif; ?>
+
 </div>
 
 <div class="row mt-3">

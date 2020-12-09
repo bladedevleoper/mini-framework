@@ -27,6 +27,7 @@ class CookieController
 
             foreach ($shoppingCart as $item) {
                 $price = str_replace('£', '', $item['price']);
+                $this->cartCollection['total_items'] += 1;
                 $this->cartCollection['cart_total'] += $price;
                 $this->cartCollection['cart_items'][] = [
                     'type' => $item['type'],
