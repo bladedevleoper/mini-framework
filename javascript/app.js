@@ -251,6 +251,12 @@ function cleanCookie(cookie)
 
 }
 
+function setCartTotal(total)
+{
+    document.querySelector('.cart-total').textContent = parseFloat(total).toFixed(2);
+
+}
+
 function build(shoppingItems)
 {
     const cartItems = shoppingItems.cart_items;
@@ -260,6 +266,7 @@ function build(shoppingItems)
         shoppingCartView.insertAdjacentHTML('beforebegin', shoppingItemHTML(item));
     });
 
+    setCartTotal(parseFloat(shoppingItems.cart_total).toFixed(2));
 }
 
 
@@ -271,5 +278,8 @@ function shoppingItemHTML(item)
             <small class="text-muted">${item.colour}</small>
         </div>
         <span class="text-muted">${item.price}</span>
+         <a class="close remove-button" aria-label="remove">
+            <span aria-hidden="true">×</span>
+         </a>
     </li>`;
 }

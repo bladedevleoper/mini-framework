@@ -98,7 +98,7 @@ if (isset($_COOKIE['shopping_list'])) {
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Shopping Cart</h5>
+                    <h5 class="modal-title">Shopping Cart - Cart Total: £<span class="cart-total"></span></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
