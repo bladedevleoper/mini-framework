@@ -152,6 +152,10 @@ function saveShoppingCart()
             setTimeout(() => {
                 enableSpinner('svg-circle', 'id', true);
                 changeText('save-shopping-cart-text', 'class', 'Save Shopping');
+                addContentToElement('save-shopping-cart', {
+                    "data-toggle": 'modal',
+                    "data-target": '#myModal',
+                });
             },700);
 
             if (response.status === 200) {
@@ -198,6 +202,15 @@ function changeText(element, selectorType = 'id', text = '')
     chosen.textContent = `${text}`;
 }
 
+function addContentToElement(element, attributes)
+{
+    let selected = document.querySelector(`.${element}`);
+
+    for (let x in attributes) {
+        selected.setAttribute(x, attributes[x]);
+    }
+}
+
 function getSelectorType(type)
 {
     switch (type) {
@@ -216,4 +229,47 @@ function displaySuccessMessage(message)
 {
     changeText('success-message', 'class', message);
     document.querySelector('.success-message').removeAttribute('hidden');
+}
+
+
+function getCookie()
+{
+    const cookie = document.cookie;
+
+    const shoppingItems = JSON.parse(cleanCookie(cookie));
+
+    return build(shoppingItems);
+
+}
+
+//will translate url encoding to string representations
+function cleanCookie(cookie)
+{
+    const cookieString = cookie.split('=').pop();
+
+    return decodeURIComponent(cookieString);
+
+}
+
+function build(shoppingItems)
+{
+    const cartItems = shoppingItems.cart_items;
+    const shoppingCartView = document.querySelector('.saved-shopping-cart');
+
+    cartItems.forEach((item) => {
+        shoppingCartView.insertAdjacentHTML('beforebegin', shoppingItemHTML(item));
+    });
+
+}
+
+
+function shoppingItemHTML(item)
+{
+    return `<li class="list-group-item d-flex justify-content-between lh-sm">
+        <div>
+            <h6 class="my-0">${item.type}</h6>
+            <small class="text-muted">${item.colour}</small>
+        </div>
+        <span class="text-muted">${item.price}</span>
+    </li>`;
 }

@@ -14,7 +14,7 @@ trait SetCookie
             'path' => '/',
             'domain' => request()->getFullUrl()['host'],
             'secure' => true,
-            'httponly' => true,
+            'httponly' => false,
             'SameSite' => 'Strict',
         ];
 

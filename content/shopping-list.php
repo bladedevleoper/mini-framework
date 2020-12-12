@@ -61,7 +61,7 @@ if (isset($_COOKIE['shopping_list'])) {
 <!--        <form method="post" action="/shopping-cart/register-cookie">-->
             <ul class="list-inline">
                 <li>
-                    <button class="btn btn-info save-shopping-cart">
+                    <button class="btn btn-info save-shopping-cart" <?= !empty($savedItems) ? "data-toggle='modal' data-target='#myModal' onclick='getCookie()'" : ''?>>
                             <svg class="ml-2" id="svg-circle" hidden width="22" height="22" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg" stroke="#fff">
                                 <g fill="none" fill-rule="evenodd">
                                     <g transform="translate(1 1)" stroke-width="2">
@@ -87,11 +87,37 @@ if (isset($_COOKIE['shopping_list'])) {
 
                     </button>
                     <?php
-                    require_once(__DIR__ .  '/../components/models/success-message.php');
+                        require_once(__DIR__ .  '/../components/models/success-message.php');
                     ?>
                 </li>
             </ul>
     </div>
 </div>
+
+    <div class="modal" id="myModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Shopping Cart</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col order-md-last">
+                            <ul class="list-group mb-3 saved-shopping-cart">
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
