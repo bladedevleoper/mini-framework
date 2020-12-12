@@ -114,7 +114,7 @@ if (isset($_COOKIE['shopping_list'])) {
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary">Save changes</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="clearModal();">Close</button>
                 </div>
             </div>
         </div>

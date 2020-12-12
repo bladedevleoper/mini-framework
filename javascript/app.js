@@ -231,7 +231,6 @@ function displaySuccessMessage(message)
     document.querySelector('.success-message').removeAttribute('hidden');
 }
 
-
 function getCookie()
 {
     const cookie = document.cookie;
@@ -263,7 +262,7 @@ function build(shoppingItems)
     const shoppingCartView = document.querySelector('.saved-shopping-cart');
 
     cartItems.forEach((item) => {
-        shoppingCartView.insertAdjacentHTML('beforebegin', shoppingItemHTML(item));
+        shoppingCartView.insertAdjacentHTML('afterbegin', shoppingItemHTML(item));
     });
 
     setCartTotal(parseFloat(shoppingItems.cart_total).toFixed(2));
@@ -282,4 +281,14 @@ function shoppingItemHTML(item)
             <span aria-hidden="true">×</span>
          </a>
     </li>`;
+}
+
+function clearModal()
+{
+   const liTags = document.querySelector('.saved-shopping-cart').querySelectorAll('li');
+
+   liTags.forEach((tag) => {
+       tag.remove();
+   });
+
 }
