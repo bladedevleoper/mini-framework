@@ -2,6 +2,7 @@
 
 use ShoppingCart\Library\Redirect\Redirect;
 use ShoppingCart\Request\Request;
+use ShoppingCart\TemplateEngine\View;
 
 function dd($data)
 {
@@ -26,4 +27,9 @@ function splitString($string, $splitBy)
 function request()
 {
     return new Request();
+}
+
+function view($view, $params)
+{
+    return (new View($view, $params))->handle();
 }

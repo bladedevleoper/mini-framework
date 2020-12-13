@@ -2,13 +2,14 @@
 
 namespace ShoppingCart\Classes;
 
+use JetBrains\PhpStorm\Pure;
 use ShoppingCart\Factory\ClothesFactory;
 
 class ShoppingList
 {
-    public $render;
+    public RenderShoppingCart $render;
 
-    public function __construct()
+    #[Pure] public function __construct()
     {
         $this->render = new RenderShoppingCart();
     }

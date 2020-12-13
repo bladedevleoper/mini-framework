@@ -1,9 +1,5 @@
 <?php
 
-use ShoppingCart\Classes\ShoppingList;
-
-$shoppingList = new ShoppingList();
-
 if (isset($_COOKIE['shopping_list'])) {
     $savedItems = json_decode($_COOKIE['shopping_list'], true);
 } else {
@@ -48,8 +44,8 @@ if (isset($_COOKIE['shopping_list'])) {
         </div>
         <?php endforeach; ?>
     <?php else : ?>
-        <?php foreach($shoppingList->getShoppingItems() as $item) : ?>
-            <?= $shoppingList->render->renderItem($item); ?>
+        <?php foreach($shoppingList as $item) : ?>
+            <?= $item; ?>
         <?php endforeach; ?>
     <?php endif; ?>
 
@@ -87,7 +83,7 @@ if (isset($_COOKIE['shopping_list'])) {
 
                     </button>
                     <?php
-                        require_once(__DIR__ .  '/../components/models/success-message.php');
+                        require_once('resource/views/components/models/success-message.php');
                     ?>
                 </li>
             </ul>
