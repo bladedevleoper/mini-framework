@@ -1,6 +1,6 @@
 <?php
 
-use ShoppingCart\Router\Router;
+use App\Router\Router;
 
 //TODO add more routes here
 //TODO look at the reflection class, get acquainted with that

@@ -9,7 +9,7 @@
     "require": {},
   "autoload": {
     "psr-4": {
-      "ShoppingCart\\": "../shopping-cart/src/"
+      "App\\": "../shopping-cart/app/"
     }
   }
 }

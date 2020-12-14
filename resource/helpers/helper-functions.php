@@ -1,8 +1,8 @@
 <?php
 
-use ShoppingCart\Library\Redirect\Redirect;
-use ShoppingCart\Request\Request;
-use ShoppingCart\TemplateEngine\View;
+use App\Library\Redirect\Redirect;
+use App\Http\Request\Request;
+use App\TemplateEngine\View;
 
 function dd($data)
 {

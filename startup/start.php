@@ -1,8 +1,8 @@
 <?php
 
-use ShoppingCart\Dispatcher\Dispatcher;
-use ShoppingCart\Request\Request;
-use ShoppingCart\Router\Router;
+use App\Dispatcher\Dispatcher;
+use App\Http\Request\Request;
+use App\Router\Router;
 
 $dispatcher = new Dispatcher(new Request(), new Router());
 
