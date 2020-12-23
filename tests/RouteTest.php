@@ -18,29 +18,29 @@ class RouteTest extends TestCase
         $this->router = new Router();
 
         Router::addGet('/', 'ShoppingListController@index');
+        Router::addPost('/save-shopping', 'SomeController@store');
 
     }
 
-    /** @test */
-    public function can_populate_get_routes()
+    /**
+     *  @test
+    */
+    public function can_populate_routes()
     {
+    
         //Act
-        $result = $this->router->getAllRoutes()['get'];
+        $result = count($this->router->getAllRoutes()['get']);
         $expected = 1;
 
         //Assertion
-        $this->assertEquals($expected, count($result));
+        $this->assertEquals($expected, $result);
+
+
+        //Act
+        $result = count($this->router->getAllRoutes()['post']);
+        $expected = 1;
+        //Assert
+        $this->assertEquals($expected, $result);
         
-
-    
-    }
-
-    /** @test */
-    public function can_access_get_routes()
-    {
-
-        var_dump($this->router);
-
-        //$this->assertEquals(1, 2);
     }
 }
