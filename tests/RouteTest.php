@@ -49,12 +49,14 @@ class RouteTest extends TestCase
     {   
         //Arrange
         $request = new Request();
+        $request->request['request_method'] = 'GET';
         $request->request['uri'] = '/shopping-cart/does-not-exist';
         $request->currentRequest();
         
         //Act and Assert
-        $this->expectException(\Exception::class);
-        $this->expectExceptionMessage('Route Does Not Exist');
+        $this->expectException(\App\Exceptions\RouteException::class);
+        $this->expectExceptionMessage('404 - Not Found. The page you requested does not exist');
+        $this->expectExceptionCode(404);
         $this->router->routeExist($request);
     }
 }

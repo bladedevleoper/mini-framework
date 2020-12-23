@@ -2,8 +2,9 @@
 
 namespace App\Router;
 
-use Exception;
+use App\Exceptions\RouteException;
 use App\Enums\PageNotFoundEnum;
+use App\Enums\ServerCodeEnum;
 use App\Enums\ServerRequestMethodEnum;
 use App\Http\Request\Request;
 
@@ -49,8 +50,6 @@ class Router
                 return $this->inGetRoutes($request->request['request_mapping']);
             case ServerRequestMethodEnum::REQUEST_METHOD_POST:
                 return $this->inPostRoutes($request->request['request_mapping']);
-            default:
-                throw new Exception('Route Does Not Exist');
         }
     }
 
@@ -63,7 +62,7 @@ class Router
     private function inGetRoutes($request): object
     {
         if (!key_exists($request->route, $this->getRoutes())) {
-            throw new Exception(PageNotFoundEnum::PAGE_NOT_FOUND);
+            throw new RouteException(PageNotFoundEnum::PAGE_NOT_FOUND, ServerCodeEnum::NOT_FOUND);
         }
 
         $route = self::$routes['get'][$request->route];
@@ -80,7 +79,7 @@ class Router
     private function inPostRoutes($request): object
     {
         if (!key_exists($request->route, $this->postRoutes())) {
-            throw new Exception(PageNotFoundEnum::PAGE_NOT_FOUND);
+            throw new RouteException(PageNotFoundEnum::PAGE_NOT_FOUND, ServerCodeEnum::NOT_FOUND);
         }
 
         $route = self::$routes['post'][$request->route];
