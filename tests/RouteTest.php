@@ -31,7 +31,6 @@ class RouteTest extends TestCase
         //Act
         $result = count($this->router->getAllRoutes()['get']);
         $expected = 1;
-
         //Assertion
         $this->assertEquals($expected, $result);
 
