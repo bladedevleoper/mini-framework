@@ -2,12 +2,13 @@
 
 namespace Tests;
 
+use App\Http\Request\Request;
 use App\Router\Router;
 use PHPUnit\Framework\TestCase;
 
 class RouteTest extends TestCase
 {
-
+    
     private Router $router;
 
     //Arrange
@@ -41,5 +42,19 @@ class RouteTest extends TestCase
         //Assert
         $this->assertEquals($expected, $result);
         
+    }
+
+    /** @test  */
+    public function exception_is_thrown_if_route_does_not_exist()
+    {   
+        //Arrange
+        $request = new Request();
+        $request->request['uri'] = '/shopping-cart/does-not-exist';
+        $request->currentRequest();
+        
+        //Act and Assert
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('Route Does Not Exist');
+        $this->router->routeExist($request);
     }
 }

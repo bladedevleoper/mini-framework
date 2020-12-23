@@ -31,7 +31,7 @@ class RequestMapper
     {
         static::setProperties($request);
 
-        return (object)[
+        return (object) [
             'route' => '/' . self::$url,
         ];
 
