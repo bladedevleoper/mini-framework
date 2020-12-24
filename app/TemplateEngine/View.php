@@ -4,7 +4,6 @@ namespace App\TemplateEngine;
 
 class View
 {
-
     private string $view;
     private array $params;
 

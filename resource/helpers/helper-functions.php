@@ -29,7 +29,7 @@ function request()
     return new Request();
 }
 
-function view($view, $params)
+function view($view, $params = [])
 {
     return (new View($view, $params))->handle();
 }

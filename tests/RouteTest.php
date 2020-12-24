@@ -17,7 +17,7 @@ class RouteTest extends TestCase
         parent::setUp();
         
         $this->router = new Router();
-
+        $this->request = new Request();
         Router::addGet('/', 'ShoppingListController@index');
         Router::addPost('/save-shopping', 'SomeController@store');
 
@@ -35,7 +35,6 @@ class RouteTest extends TestCase
         //Assert
         $this->assertEquals($expected, $result);
 
-
         //Act
         $result = count($this->router->getAllRoutes()['post']);
         $expected = 1;
@@ -48,15 +47,14 @@ class RouteTest extends TestCase
     public function exception_is_thrown_if_route_does_not_exist()
     {   
         //Arrange
-        $request = new Request();
-        $request->request['request_method'] = 'GET';
-        $request->request['uri'] = '/shopping-cart/does-not-exist';
-        $request->currentRequest();
+        $this->request->request['request_method'] = 'GET';
+        $this->request->request['uri'] = '/shopping-cart/does-not-exist';
+        $this->request->currentRequest();
         
         //Act and Assert
         $this->expectException(\App\Exceptions\RouteException::class);
         $this->expectExceptionMessage('404 - Not Found. The page you requested does not exist');
         $this->expectExceptionCode(404);
-        $this->router->routeExist($request);
+        $this->router->routeExist($this->request);
     }
 }

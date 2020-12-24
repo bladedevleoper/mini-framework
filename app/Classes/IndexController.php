@@ -2,7 +2,6 @@
 
 namespace App\Classes;
 
-
 class IndexController
 {
     public function index()
@@ -13,6 +12,6 @@ class IndexController
             1 - test the cookie here
             2 - maybe look at doing a helper function for a view?
         */
-
+        return view('home', []);
     }
 }
