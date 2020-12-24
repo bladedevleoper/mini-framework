@@ -23,9 +23,10 @@ class ViewTest extends TestCase
     {
         //TODO mock a view to execute the handle method
         //Act
-        $mock = $this->createStub(View::class);
-        
-        $mock->method('handle')->willReturn('home');
-        $this->assertSame('home', $mock->handle());
+        $controller = $this->createMock(IndexController::class);
+
+        $controller->method('index')
+            ->willReturn('home');
+        $this->assertSame('home', $controller->index());
     }    
 }
