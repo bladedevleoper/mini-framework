@@ -4,9 +4,6 @@ namespace Tests;
 
 use PHPUnit\Framework\TestCase;
 use App\Classes\IndexController;
-use App\TemplateEngine\View;
-
-require_once __DIR__ . '../../resource/helpers/helper-functions.php';
 
 class ViewTest extends TestCase
 {
