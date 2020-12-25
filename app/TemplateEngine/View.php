@@ -52,4 +52,10 @@ class View
         //then return the output between the header and footer
         include_once __DIR__ . "/../../resource/layout/layout.php";
     }
+
+    // public function __toString()
+    // {
+    //     return $this->handle();
+    // }
+
 }
