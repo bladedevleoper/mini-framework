@@ -31,5 +31,5 @@ function request()
 
 function view($view, $params = [])
 {
-    return (new View($view, $params))->handle();
+    return (new View($view, $params));
 }

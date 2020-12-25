@@ -2,6 +2,8 @@
 
 namespace App\TemplateEngine;
 
+use App\Exceptions\ViewException;
+
 class View
 {
     private string $view;
@@ -11,9 +13,32 @@ class View
     {
         $this->view = $view;
         $this->params = $params;
+        $this->doesFileExist();
     }
 
-    public function handle()
+    /**
+     * Will check if the file exists and then handle the rendering
+     *
+     * @return void
+     * @throws ViewException
+     */
+    public function doesFileExist()
+    {   
+        try {
+
+            if (!file_exists(__DIR__ . "/../../resource/views/{$this->view}.php")) {
+                throw new ViewException('View Cannot be found', 404);
+            }
+
+            return $this->handle();
+
+        } catch (ViewException $e) {
+            echo $e->getMessage();
+            exit;
+        }
+    }
+
+    private function handle()
     {
         //need to assign the html to a variable
         foreach($this->params as $key => $value) {
@@ -26,7 +51,5 @@ class View
         $content = ob_get_clean(); //static::obGetClean();
         //then return the output between the header and footer
         include_once __DIR__ . "/../../resource/layout/layout.php";
-
     }
-
 }
