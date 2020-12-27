@@ -21,16 +21,9 @@ class ParseHtmlTest extends TestCase
     public function can_parse_curley_braces_into_php_tags()
     {
         //Act
-        $result = $this->parser->parse('<h5>{{$hello}}</h5>');
-        $expected = '<h5><?=$hello;?></h5>';
-
-        //Assert
-        $this->assertEquals($expected, $result);
-
-        //Act
-        $result = $this->parser->parse('<h5>{{ $hello }}</h5>');
-        $expected = '<h5><?=$hello;?></h5>';
- 
+        $result = $this->parser->parse('<h5>{{ $hello }} Test String</h5>');
+        $expected = '<h5><?= $hello ;?> Test String</h5>';
+        
         //Assert
         $this->assertEquals($expected, $result);
     }

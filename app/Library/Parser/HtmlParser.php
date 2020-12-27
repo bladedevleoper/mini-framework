@@ -7,14 +7,10 @@ class HtmlParser
     private $toParse = [
         '{{' => '<?=',
         '}}' => ';?>',
-        ' ' => '',
     ];
-
-    
+ 
     public function parse($html)
     {
-        $parsed = strtr($html, $this->toParse);
-
-        return $parsed;
+        return strtr($html, $this->toParse);
     }
 }
