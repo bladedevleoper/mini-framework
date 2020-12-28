@@ -9,7 +9,7 @@ use App\Library\Parser\HtmlParser;
  */
 class ParseHtmlTest extends TestCase
 {
-    private $pasrser;
+    private HtmlParser $parser;
 
     protected function setUp(): void
     {
@@ -22,8 +22,8 @@ class ParseHtmlTest extends TestCase
     {
         //Act
         $result = $this->parser->parse('<h5>{{ $hello }} Test String</h5>');
-        $expected = '<h5><?= $hello ;?> Test String</h5>';
-        
+        $expected = '<h5><?=$hello;?> Test String</h5>';
+
         //Assert
         $this->assertEquals($expected, $result);
     }
