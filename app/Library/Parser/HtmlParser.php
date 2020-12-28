@@ -2,8 +2,12 @@
 
 namespace App\Library\Parser;
 
-class HtmlParser 
+use App\Traits\RegexTrait;
+
+class HtmlParser
 {
+    use RegexTrait;
+
     private $toParse = [
         '{{' => '<?=',
         '}}' => ';?>',
@@ -16,7 +20,6 @@ class HtmlParser
      */
     public function parse($html): string
     {
-        $html = preg_replace('/\s+(?=[$])|\s+(?=}})/', '', $html);
-        return strtr($html, $this->toParse);
+        return strtr($this->removeSpacesBetweenCurlyBraces($html), $this->toParse);
     }
 }

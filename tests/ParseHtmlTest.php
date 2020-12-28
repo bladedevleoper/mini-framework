@@ -23,7 +23,12 @@ class ParseHtmlTest extends TestCase
         //Act
         $result = $this->parser->parse('<h5>{{ $hello }} Test String</h5>');
         $expected = '<h5><?=$hello;?> Test String</h5>';
+        //Assert
+        $this->assertEquals($expected, $result);
 
+        //Act
+        $result = $this->parser->parse('<div>Hello {{$name }} welcome today is {{ $date }}</div>');
+        $expected = '<div>Hello <?=$name;?> welcome today is <?=$date;?></div>';
         //Assert
         $this->assertEquals($expected, $result);
     }
