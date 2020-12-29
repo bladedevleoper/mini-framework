@@ -15,10 +15,10 @@ class HtmlParser
 
     /**
      * Parses curly brace string an return php tags
-     * @param $html
+     * @param string $html
      * @return string
      */
-    public function parse($html): string
+    public function parse(string $html): string
     {
         return strtr($this->removeSpacesBetweenCurlyBraces($html), $this->toParse);
     }

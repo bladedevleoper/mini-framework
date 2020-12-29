@@ -32,4 +32,10 @@ class ParseHtmlTest extends TestCase
         //Assert
         $this->assertEquals($expected, $result);
     }
+
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+        $this->parser;
+    }
 }
