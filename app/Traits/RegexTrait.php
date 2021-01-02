@@ -12,6 +12,6 @@ trait RegexTrait
      */
     public function removeSpacesBetweenCurlyBraces(string $string): string
     {
-        return preg_replace('/\s+(?=[$])|\s+(?=}})/', '', $string);
+        return preg_replace('/(?<=[{{])\s+|\s+(?=[}}])/', '', $string);
     }
 }
