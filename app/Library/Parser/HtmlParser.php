@@ -8,7 +8,7 @@ class HtmlParser
 {
     use RegexTrait;
 
-    private $toParse = [
+    private array $toParse = [
         '{{' => '<?=',
         '}}' => ';?>',
     ];
