@@ -13,6 +13,9 @@ class ViewCache extends Cache implements CacheInterface
     public function cache($file)
     {
         //TODO add caching job here
+        if (!file_exists($this->cachePath)) {
+            mkdir($this->cachePath, 0744);
+        }
     }
 
     /**
